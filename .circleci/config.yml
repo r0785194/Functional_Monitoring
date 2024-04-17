@@ -10,10 +10,10 @@ jobs:
       # Install Maven
       - run:
           name: Install Maven
-          command: sudo apt-get install -y maven
+          command: apt-get install maven
       - run:
           name: Install ChromeDriver
-          command: sudo apt-get install -y chromium-chromedriver
+          command: apt-get install chromium-chromedriver
       - run:
           name: Calculate cache key
           command: |-
