@@ -10,7 +10,7 @@ jobs:
       # Install Maven
       - run:
           name: Install Maven
-          command: apt-get install maven
+          command: sudo apt-get install maven
       - run:
           name: Install ChromeDriver
           command: apt-get install chromium-chromedriver
