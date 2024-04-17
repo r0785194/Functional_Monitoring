@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ProductDetailSteps {
 
-    private ProductDetailPage productDetailPage = new ProductDetailPage();
+    private final ProductDetailPage productDetailPage = new ProductDetailPage();
 
     @When("I click on a product")
     public void iClickOnAProduct() {

@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class LogoutSteps {
 
-    private LogOutPage logOutPage = new LogOutPage();
+    private final LogOutPage logOutPage = new LogOutPage();
 
     @When("I click on the hamburger menu in the nav. bar")
     public void iClickOnTheHamburgerMenuInTheNavBar() {

@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SortingProductPageSteps {
 
-    private SortingProductPage sortingProductPage = new SortingProductPage();
+    private final SortingProductPage sortingProductPage = new SortingProductPage();
 
     @When("I click on the filter option button")
     public void iClickOnTheFilterOptionButton() {

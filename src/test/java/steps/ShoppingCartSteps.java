@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ShoppingCartSteps {
 
-    private ShoppingCartPage shoppingCartPage = new ShoppingCartPage();
+    private final ShoppingCartPage shoppingCartPage = new ShoppingCartPage();
 
     @Given("I am on the ‘Your cart’ page")
     public void iAmOnTheYourCartPage() {
