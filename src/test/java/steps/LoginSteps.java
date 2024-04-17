@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 public class LoginSteps {
-    private LogInPage logInPage = new LogInPage();
+    private final LogInPage logInPage = new LogInPage();
 
     @Given("I am on the login page")
     public void iAmOnTheLoginPage() {
