@@ -8,7 +8,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import refleqt.MonitoringApplication;
 
 @RunWith(Cucumber.class)
-@CucumberContextConfiguration
 @SpringBootTest(classes = { MonitoringApplication.class,
                     RunnerTest.class})
 @CucumberOptions(plugin = {"pretty", "json:target/cucumber-reports/json/report.json"},glue = ("steps"), features = "src/test/resources/features")
