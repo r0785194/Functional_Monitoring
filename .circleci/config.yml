@@ -5,19 +5,21 @@ jobs:
   test-java:
     docker:
       - image: cimg/openjdk:21.0
+    orbs:
+      maven: circleci/maven@1.4.1
     steps:
       - checkout
-      # Install ca-certificates
-      - run:
-          name: Install ca-certificates
-          command: |
-            sudo apt-get update
-            sudo apt-get install -y ca-certificates
-      - run:
-          name: Install Maven
-          command: |
-            sudo apt-get update
-            sudo apt-get install -y maven
+#      # Install ca-certificates
+#      - run:
+#          name: Install ca-certificates
+#          command: |
+#            sudo apt-get update
+#            sudo apt-get install -y ca-certificates
+#      - run:
+#          name: Install Maven
+#          command: |
+#            sudo apt-get update
+#            sudo apt-get install -y maven
       - run:
           name: Verify Maven installation
           command: mvn --version
