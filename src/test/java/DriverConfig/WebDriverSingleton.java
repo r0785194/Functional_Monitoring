@@ -8,6 +8,7 @@ public abstract class WebDriverSingleton {
     private static WebDriver driver;
     public static WebDriver getDriver() {
         if (driver == null) {
+            System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");
             driver = new ChromeDriver();
         }
         return driver;
