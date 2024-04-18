@@ -4,10 +4,10 @@ version: 2.1
 jobs:
   test-java:
     docker:
-      - image: maven:3.8.4-jdk-21  # Gebruik Maven met Java 21 als het hoofdbeeld
+      - image: maven:amazoncorretto # Gebruik Maven met Java 21 als het hoofdbeeld
         environment:
-            JAVA_HOME: /usr/local/openjdk-21
-            PATH: /usr/local/openjdk-21/bin:$PATH
+         JAVA_HOME: /usr/local/openjdk-21
+         PATH: /usr/local/openjdk-21/bin:$PATH
       - image: cimg/openjdk:21.0
     steps:
       - checkout
