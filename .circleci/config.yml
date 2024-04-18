@@ -24,7 +24,9 @@ jobs:
                     sort | xargs cat > /tmp/CIRCLECI_CACHE_KEY
       - restore_cache:
           key: cache-{{ checksum "/tmp/CIRCLECI_CACHE_KEY" }}
-      - run: mvn verify -e
+      - run:
+          mvn clean install
+          mvn verify -e
       - store_test_results:
           path: target/surefire-reports
       - save_cache:
