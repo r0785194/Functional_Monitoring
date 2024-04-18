@@ -12,7 +12,7 @@ jobs:
     steps:
       - checkout
       # Maven orb-stap om Maven te gebruiken
-      - maven/validate
+      - maven/install
 
       # Browser-tools orb-stap om ChromeDriver te installeren
       - browser-tools/install-chrome
