@@ -11,12 +11,17 @@ jobs:
 
     steps:
       - checkout
+      # Maven orb-stap om Maven te gebruiken
+      - maven/validate
+
+      # Browser-tools orb-stap om ChromeDriver te installeren
+      - browser-tools/install-chrome
       - run:
-          name: Verify Maven installation
-          command: mvn --version
-      - run:
-         name: Verify ChromeDriver installation
-         command: chrome --version
+          name: Install ChromeDriver
+          command: |
+            CHROME_VERSION=$(google-chrome-stable --version | cut -d " " -f 3 | cut -d "." -f 1)
+            CHROMEDRIVER_VERSION=$(browser-tools latest-chromedriver-version $CHROME_VERSION)
+            browser-tools install-chromedriver $CHROMEDRIVER_VERSION
       - run:
           name: Calculate cache key
           command: |-
