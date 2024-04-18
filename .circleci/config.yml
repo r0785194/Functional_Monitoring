@@ -4,9 +4,12 @@ version: 2.1
 jobs:
   test-java:
     docker:
-      - image: maven:3.9.6-jdk-21
+      - image: maven:amazoncorretto
     steps:
       - checkout
+      - run:
+          name: Verify Maven installation
+          command: mvn --version
       # Install Maven
 #      - run:
 #          name: Install Maven
