@@ -11,8 +11,9 @@ jobs:
 
     steps:
       - checkout
-      # Maven orb-stap om Maven te gebruiken
-      - maven/install
+      - run:
+          name: maven version
+          command: mvn --version
 
       # Browser-tools orb-stap om ChromeDriver te installeren
       - browser-tools/install-chrome
