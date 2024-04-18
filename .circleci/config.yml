@@ -7,10 +7,15 @@ jobs:
       - image: cimg/openjdk:21.0
     steps:
       - checkout
+      # Install ca-certificates
+      - run:
+          name: Install ca-certificates
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y ca-certificates
       - run:
           name: Install Maven
           command: |
-            sudo apt-get install ca-certificates-java
             sudo apt-get update
             sudo apt-get install -y maven
       - run:
