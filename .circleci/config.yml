@@ -16,7 +16,7 @@ jobs:
           command: mvn --version
       - run:
          name: Verify ChromeDriver installation
-         command: chromedriver --version
+         command: chrome --version
       - run:
           name: Calculate cache key
           command: |-
