@@ -14,6 +14,7 @@ jobs:
       - run:
           name: maven version
           command: mvn --version
+      - run: mvn dependency:resolve
 
       - browser-tools/install-chrome
       - browser-tools/install-chromedriver
@@ -24,7 +25,6 @@ jobs:
                     sort | xargs cat > /tmp/CIRCLECI_CACHE_KEY
       - restore_cache:
           key: cache-{{ checksum "/tmp/CIRCLECI_CACHE_KEY" }}
-      - run: mvn clean install
       - run: mvn verify -e
       - store_test_results:
           path: target/surefire-reports
