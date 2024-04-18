@@ -2,7 +2,9 @@ package DriverConfig;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.springframework.context.annotation.Configuration;
 
+@Configuration
 public abstract class WebDriverSingleton {
 
     private static WebDriver driver;
