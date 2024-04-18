@@ -1,12 +1,13 @@
 # This config was automatically generated from your source code
 # Stacks detected: deps:java:.
 version: 2.1
+orbs:
+  maven: circleci/maven@1.4.1
 jobs:
   test-java:
     docker:
       - image: cimg/openjdk:21.0
-    orbs:
-      maven: circleci/maven@1.4.1
+
     steps:
       - checkout
 #      # Install ca-certificates
