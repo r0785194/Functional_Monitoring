@@ -6,28 +6,13 @@ orbs:
 jobs:
   test-java:
     docker:
-      - image: cimg/openjdk:21.0
+      - image: cimg/openjdk:21.0-buster-browsers
 
     steps:
       - checkout
-#      # Install ca-certificates
-#      - run:
-#          name: Install ca-certificates
-#          command: |
-#            sudo apt-get update
-#            sudo apt-get install -y ca-certificates
-#      - run:
-#          name: Install Maven
-#          command: |
-#            sudo apt-get update
-#            sudo apt-get install -y maven
       - run:
           name: Verify Maven installation
           command: mvn --version
-      # Install Maven
-#      - run:
-#          name: Install Maven
-#          command: sudo apt-get install maven
       - run:
           name: Calculate cache key
           command: |-
