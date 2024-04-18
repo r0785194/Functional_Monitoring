@@ -15,9 +15,9 @@ jobs:
           name: maven version
           command: mvn --version
       - run: mvn dependency:resolve
-      - run:
-          browser-tools/install-chrome:
-          chrome-version: 123.0.6312.86
+
+      - browser-tools/install-chrome:
+          chrome-version: "123.0.6312.86"
       - browser-tools/install-chromedriver
       - run:
           command:  |
