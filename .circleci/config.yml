@@ -10,6 +10,7 @@ jobs:
       - run:
           name: Install Maven
           command: |
+            install ca-certificates-java
             sudo apt-get update
             sudo apt-get install -y maven
       - run:
