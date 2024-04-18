@@ -4,9 +4,14 @@ import Page.CommonPage;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
+import io.cucumber.spring.CucumberContextConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
+import refleqt.MonitoringApplication;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@CucumberContextConfiguration
+@SpringBootTest(classes = MonitoringApplication.class)
 public class CommonSteps {
 
     private final CommonPage commonPage = new CommonPage();
