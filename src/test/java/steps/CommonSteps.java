@@ -8,7 +8,6 @@ import io.cucumber.spring.CucumberContextConfiguration;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@CucumberContextConfiguration
 public class CommonSteps {
 
     private final CommonPage commonPage = new CommonPage();
