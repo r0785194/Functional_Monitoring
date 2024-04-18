@@ -19,6 +19,10 @@ jobs:
       - browser-tools/install-chrome
       - browser-tools/install-chromedriver
       - run:
+          command:  |
+            google-chrome --version
+            chromedriver --version
+      - run:
           name: Calculate cache key
           command: |-
             find . -name 'pom.xml' -o -name 'gradlew*' -o -name '*.gradle*' | \
