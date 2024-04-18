@@ -17,12 +17,13 @@ jobs:
 
       # Browser-tools orb-stap om ChromeDriver te installeren
       - browser-tools/install-chrome
-      - run:
-          name: Install ChromeDriver
-          command: |
-            CHROME_VERSION=$(google-chrome-stable --version | cut -d " " -f 3 | cut -d "." -f 1)
-            CHROMEDRIVER_VERSION=$(browser-tools latest-chromedriver-version $CHROME_VERSION)
-            browser-tools install-chromedriver $CHROMEDRIVER_VERSION
+      - browser-tools/install-chromedriver
+#      - run:
+#          name: Install ChromeDriver
+#          command: |
+#            CHROME_VERSION=$(google-chrome-stable --version | cut -d " " -f 3 | cut -d "." -f 1)
+#            CHROMEDRIVER_VERSION=$(browser-tools latest-chromedriver-version $CHROME_VERSION)
+#            browser-tools install-chromedriver $CHROMEDRIVER_VERSION
       - run:
           name: Calculate cache key
           command: |-
