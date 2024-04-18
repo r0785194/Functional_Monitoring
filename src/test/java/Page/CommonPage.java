@@ -24,7 +24,7 @@ public class CommonPage extends WebDriverSingleton {
     @FindBy(id = "inventory_container")
     private WebElement productPage;
 
-    private static WebDriver driver;
+    private WebDriver driver;
 
     public CommonPage() {
         PageFactory.initElements(driver = getDriver(), this);

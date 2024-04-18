@@ -4,7 +4,6 @@ version: 2.1
 orbs:
   maven: circleci/maven@1.4.1
   browser-tools: circleci/browser-tools@1.4.8
-  spring-boot: circleci/spring-boot@0.2.1
 jobs:
   test-java:
     docker:
@@ -25,7 +24,7 @@ jobs:
                     sort | xargs cat > /tmp/CIRCLECI_CACHE_KEY
       - restore_cache:
           key: cache-{{ checksum "/tmp/CIRCLECI_CACHE_KEY" }}
-      - run: mvn verify
+      - run: mvn verify -e
       - store_test_results:
           path: target/surefire-reports
       - save_cache:
