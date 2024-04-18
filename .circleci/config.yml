@@ -16,7 +16,7 @@ jobs:
           command: mvn --version
       - run: mvn dependency:resolve
 
-      - browser-tools/install-browser-tools:
+      - browser-tools/install-chrome:
           chrome-version: 123.0.6312.86
       - browser-tools/install-chromedriver
       - run:
