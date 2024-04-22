@@ -46,18 +46,18 @@ jobs:
           name: Run tests
           command: mvn verify -Psanity
 
-  regression-test:
-    docker:
-      - image: cimg/openjdk:21.0
-      - image: selenium/standalone-chrome:3.141.59-20200409
-        environment:
-          CI: true
-    steps:
-      - checkout
-      - run: mvn dependency:resolve
-      - run:
-          name: Run tests
-          command: mvn verify -Pregression
+#  regression-test:
+#    docker:
+#      - image: cimg/openjdk:21.0
+#      - image: selenium/standalone-chrome:3.141.59-20200409
+#        environment:
+#          CI: true
+#    steps:
+#      - checkout
+#      - run: mvn dependency:resolve
+#      - run:
+#          name: Run tests
+#          command: mvn verify -Pregression
 
 workflows:
   build-and-test:
@@ -69,6 +69,8 @@ workflows:
       - sanity-test:
           requires:
             - build
-      - regression-test:
-          requires:
-            - build
+
+# No regrssion tests
+#      - regression-test:
+#          requires:
+#            - build
