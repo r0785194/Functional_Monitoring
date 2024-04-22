@@ -5,7 +5,7 @@ orbs:
   maven: circleci/maven@1.4.1
   browser-tools: circleci/browser-tools@1.4.8
 jobs:
-  build:
+  test-java:
     docker:
       - image: cimg/openjdk:21.0
       - image: selenium/standalone-chrome:3.141.59-20200409
@@ -22,7 +22,7 @@ jobs:
       - run: mvn dependency:resolve
       - run:
           name: Run tests
-          command: mvn clean test
+          command: mvn verify
 workflows:
   build-and-test:
     jobs:
