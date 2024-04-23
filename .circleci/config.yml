@@ -69,6 +69,7 @@ workflows:
       - sanity-test:
           requires:
             - build
+            - smoke-test
 
 # No regrssion tests
 #      - regression-test:
