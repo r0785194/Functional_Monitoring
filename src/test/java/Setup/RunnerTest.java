@@ -10,6 +10,7 @@ import refleqt.MonitoringApplication;
 @RunWith(Cucumber.class)
 @SpringBootTest(classes = { MonitoringApplication.class,
                     RunnerTest.class})
+@CucumberContextConfiguration
 @CucumberOptions(plugin = {"pretty", "json:target/cucumber-reports/json/report.json"},glue = ("steps"), features = "src/test/resources/features")
 public class RunnerTest {
 }
