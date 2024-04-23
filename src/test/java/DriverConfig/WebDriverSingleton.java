@@ -7,6 +7,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Optional;
 
 public abstract class WebDriverSingleton {
     private static ChromeOptions options = new ChromeOptions();
@@ -18,15 +19,10 @@ public abstract class WebDriverSingleton {
     private static WebDriver driver;
     public static WebDriver getDriver() {
         if (driver == null) {
-            if (isRunningOnCircleCI()){
-                try {
-                    driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), getOptions());
-                } catch (MalformedURLException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-            else {
-                driver = new ChromeDriver(getOptions());
+            try {
+                driver = isRunningOnCircleCI() ? new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), getOptions()) : new ChromeDriver(getOptions());
+            } catch (MalformedURLException e) {
+                throw new RuntimeException("Fout bij het maken van de URL voor de RemoteWebDriver", e);
             }
         }
         return driver;
@@ -40,6 +36,6 @@ public abstract class WebDriverSingleton {
     }
 
     private static boolean isRunningOnCircleCI() {
-        return Boolean.parseBoolean(System.getenv("CI"));
+        return Optional.ofNullable(System.getenv("CI")).map(Boolean::parseBoolean).orElse(false);
     }
 }
