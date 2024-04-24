@@ -5,7 +5,7 @@ target/
 !**/src/test/**/target/
 
 # Behoud de target/cucumber-reports/xml-map
-!**/src/test/**/target/cucumber-reports/xml/
+!/src/test/**/target/cucumber-reports/xml/
 
 ### STS ###
 .apt_generated
