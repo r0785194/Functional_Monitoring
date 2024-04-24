@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Cucumber" time="11.319" tests="2" skipped="0" failures="0" errors="0">
+<testcase classname="Log in to the website" name="Successful Login" time="5.089">
+<system-out><![CDATA[
+Given I am on the login page................................................passed
+When I fill in my username standard_user....................................passed
+And I fill in my password secret_sauce......................................passed
+And I click on the login button.............................................passed
+Then I'm logged in..........................................................passed
+And redirected to the product page..........................................passed
+]]></system-out>
+</testcase>
+<testcase classname="Log out of the website" name="Successful Logout" time="3.88">
+<system-out><![CDATA[
+Given I am correctly logged in with username standard_user and password secret_sauce.passed
+Given I am on the product page..............................................passed
+When I click on the hamburger menu in the nav. bar..........................passed
+Then I see a list of buttons................................................passed
+When I click on logout......................................................passed
+Then I am logged out of the application.....................................passed
+And redirected to the Home Screen the login screen..........................passed
+]]></system-out>
+</testcase>
+</testsuite>
