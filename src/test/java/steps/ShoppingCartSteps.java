@@ -24,6 +24,8 @@ public class ShoppingCartSteps {
     @When("I click on the ‘add to cart’ next to a product")
     public void iClickOnTheAddToCartNextToAProduct() {
         shoppingCartPage.clickOnAddToCart();
+        shoppingCartPage.getAddedItemName();
+        assertThat(shoppingCartPage.isCartBadgeShown()).isTrue();
     }
 
     @When("I click on the shopping cart icon")
@@ -64,8 +66,6 @@ public class ShoppingCartSteps {
 
     @Then("the product is added to my cart")
     public void theProductIsAddedToMyCart() {
-        shoppingCartPage.getAddedItemName();
-        assertThat(shoppingCartPage.isCartBadgeShown()).isTrue();
         shoppingCartPage.goToCart();
         assertTrue(shoppingCartPage.isAddedToCart());
     }
