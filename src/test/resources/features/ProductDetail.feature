@@ -1,7 +1,8 @@
+@Regression
 Feature: See the product detail page
 
-Background:
-Given I am correctly logged in with username standard_user and password secret_sauce
+  Background:
+  Given I am correctly logged in with username standard_user and password secret_sauce
   @Sanity
   Scenario: See product detail page
   Given I am on the product page

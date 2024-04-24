@@ -1,3 +1,4 @@
+@Regression
 Feature: Log in to the website
 
   @Smoke

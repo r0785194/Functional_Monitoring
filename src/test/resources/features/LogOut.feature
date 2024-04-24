@@ -1,3 +1,4 @@
+@Regression
 Feature: Log out of the website
 
   Background:

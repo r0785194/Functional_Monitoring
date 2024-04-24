@@ -1,3 +1,4 @@
+@Regression
 Feature: Shopping Cart Functionality
 
   Background:
@@ -6,13 +7,10 @@ Feature: Shopping Cart Functionality
   @Sanity
   Scenario:Add products to the cart
     When I click on the ‘add to cart’ next to a product
-    Then the product is added to my cart
-
-    #Already included in the Add products to the cart scenario. So still needed? Vrage aan joppe
-  Scenario: I’ve already added a product to my cart
-    When I click on the shopping cart icon
+    And I click on the shopping cart icon
     Then I’m redirected to the ‘your cart’ screen
-    And I can see all the products that I’ve added to my cart
+    And the product is added to my cart
+
   @Sanity
   Scenario: I don’t have a product added to my cart
     When I click on the shopping cart icon

@@ -1,9 +1,9 @@
-
+@Regression
 Feature: Sorting ProductPage
 
   Background:
     Given I am correctly logged in with username standard_user and password secret_sauce
-@Sanity
+  @Sanity
   Scenario:  sorting method ‘Name (A to Z)’
     Given I am on the product page
     When I click on the filter option button

@@ -75,10 +75,6 @@ public class ShoppingCartSteps {
         assertTrue(shoppingCartPage.isOnCartPage());
     }
 
-    @Then("I can see all the products that I’ve added to my cart")
-    public void iCanSeeAllTheProductsThatIVeAddedToMyCart() {
-    }
-
     @Then("the list of products in my cart is empty")
     public void theListOfProductsInMyCartIsEmpty() {
         assertTrue(shoppingCartPage.isCartEmpty());
