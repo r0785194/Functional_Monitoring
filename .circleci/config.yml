@@ -11,6 +11,7 @@ jobs:
       - image: selenium/standalone-chrome:3.141.59-20200409
         environment:
           CI: true
+        machine: true
     steps:
       - checkout
       - browser-tools/install-chrome
