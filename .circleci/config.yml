@@ -16,6 +16,8 @@ jobs:
       - browser-tools/install-chrome
       - browser-tools/install-chromedriver
       - run:
+          command: docker --version
+      - run:
           command: docker restart grafana
       - run:
           command: docker restart influxdb
