@@ -16,6 +16,10 @@ jobs:
       - browser-tools/install-chrome
       - browser-tools/install-chromedriver
       - run:
+          command: docker restart grafana
+      - run:
+          command: docker restart influxdb
+      - run:
           command:  |
             google-chrome --version
             chromedriver --version
@@ -32,6 +36,21 @@ jobs:
       - run:
           name: Run tests
           command: mvn verify -Psmoke
+      - run:
+          name: Run tests and check logs
+          command: |
+            # Start de telegraf-container
+            docker restart telegraf
+            
+            # Continu controleren op logboekregels en stop de container als de regel wordt gevonden
+            docker logs -f telegraf-container | \
+              while IFS= read -r line; do
+                if [[ "$line" == *"[outputs.influxdb_v2] Wrote batch"* ]]; then
+                  echo "Found: $line"
+                  docker stop telegraf
+                  break
+                fi
+              done
 
   sanity-test:
     docker:

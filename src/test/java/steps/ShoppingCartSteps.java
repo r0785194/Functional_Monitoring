@@ -104,7 +104,7 @@ public class ShoppingCartSteps {
         assertTrue(shoppingCartPage.isOnCheckoutOverview());
     }
 
-    @Then("I see a order confirmation screen")
+    @Then("I see an order confirmation screen")
     public void iSeeAOrderConfirmationScreen() {
         assertTrue(shoppingCartPage.isCheckoutComplete());
     }

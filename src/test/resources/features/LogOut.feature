@@ -3,6 +3,7 @@ Feature: Log out of the website
 
   Background:
   Given I am correctly logged in with username standard_user and password secret_sauce
+
   @Smoke
   Scenario: Successful Logout
   Given I am on the product page
