@@ -11,8 +11,6 @@ jobs:
       - image: selenium/standalone-chrome:3.141.59-20200409
         environment:
           CI: true
-    services:
-      - docker
     steps:
       - checkout
       - browser-tools/install-chrome
