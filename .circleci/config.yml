@@ -16,9 +16,7 @@ jobs:
       - browser-tools/install-chrome
       - browser-tools/install-chromedriver
       - run:
-          name: Set DOCKER_HOST variable
-          command: |
-            export DOCKER_HOST=tcp://172.31.83.141:2375
+          command: docker --version
       - run:
           command: docker restart grafana
       - run:
