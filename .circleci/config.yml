@@ -44,7 +44,7 @@ jobs:
       - setup_remote_docker
       - run:
           name: Setup custom environment variables
-          command: echo 'export TEST_FILE_PATH="/mnt/c/Users/Laura/Documents/Stage/Functional_Monitoring/target/surefire-reports/TEST-Setup.RunnerTest.xml"' >> "$BASH_ENV"
+          command: echo 'export TEST_FILE_PATH="C:\Users\Laura\Documents\Stage\Functional_Monitoring\target\surefire-reports\TEST-Setup.RunnerTest.xml"' >> "$BASH_ENV"
       - run:
           name: Set environment variables
           command: echo $TEST_FILE_PATH
