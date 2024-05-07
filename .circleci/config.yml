@@ -43,11 +43,14 @@ jobs:
       # Setup remote Docker environment
       - setup_remote_docker
       - run:
-          name: Set environment variables
-          command: echo "export TEST_FILE_PATH=$TEST_FILE_PATH" >> $BASH_ENV
+          name: Setup custom environment variables
+          command: echo 'export TEST_FILE_PATH="/mnt/c/Users/Laura/Documents/Stage/Functional_Monitoring/target/surefire-reports/TEST-Setup.RunnerTest.xml"' >> "$BASH_ENV"
       - run:
-          name: Save secret value to file
-          command: echo "$TEST_FILE_PATH" > test_file_path.txt
+          name: Set environment variables
+          command: echo $TEST_FILE_PATH
+#      - run:
+#          name: Save secret value to file
+#          command: echo "$TEST_FILE_PATH" > test_file_path.txt
       # Run Telegraf container
       - run: docker run -d --name telegraf --network influxdb-network --mount type=bind,source="$(cat test_file_path.txt)",target=/etc/telegraf-xml -v telegraf-config:/etc/telegraf telegraf
       - run:
