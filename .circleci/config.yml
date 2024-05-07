@@ -19,7 +19,8 @@ jobs:
       - run:
           command: docker --version
       - run:
-          command: docker run -d --name grafana -p 3000:3000 --network influxdb-network grafana/grafana
+          command: docker network create influxdb-network
+                   docker run -d --name grafana -p 3000:3000 --network influxdb-network grafana/grafana
       #      - run:
 #          command: docker restart influxdb
       - run:
