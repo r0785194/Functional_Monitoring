@@ -43,7 +43,7 @@ jobs:
       # Setup remote Docker environment
       - setup_remote_docker
       # Run Telegraf container
-      - run: docker run -d --name telegraf --network influxdb-network --mount type=bind,source="$(pwd)/target/surefire-reports/TEST-Setup.RunnerTest.xml",target=/etc/telegraf-xml -v telegraf-config:/etc/telegraf telegraf
+      - run: docker run -d --name telegraf --network influxdb-network --mount type=bind,source="$TEST_FILE_PATH",target=/etc/telegraf-xml -v telegraf-config:/etc/telegraf telegraf
       - run:
           name: Wait for Telegraf logs
           command: bash telegraf-monitor.sh wait_for_log_line telegraf "\[outputs.influxdb_v2\] Wrote batch of"
