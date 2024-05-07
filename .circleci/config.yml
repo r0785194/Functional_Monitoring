@@ -8,16 +8,16 @@ jobs:
   build:
     docker:
       - image: cimg/openjdk:21.0
-      - image: ubuntu-2204:2024.01.2
       - image: selenium/standalone-chrome:3.141.59-20200409
         environment:
+          DOCKER_HOST: tcp://localhost:2375
           CI: true
     steps:
       - checkout
       - browser-tools/install-chrome
       - browser-tools/install-chromedriver
       - run:
-          command: sudo service docker start
+          command: docker --version
       - run:
           command: docker start grafana
 #      - run:
