@@ -8,6 +8,7 @@ jobs:
   build:
     docker:
       - image: cimg/openjdk:21.0
+      - image: ubuntu-2204:2024.01.2
       - image: selenium/standalone-chrome:3.141.59-20200409
         environment:
           CI: true
@@ -16,7 +17,7 @@ jobs:
       - browser-tools/install-chrome
       - browser-tools/install-chromedriver
       - run:
-          command: docker --version
+          command: sudo service docker start
       - run:
           command: docker start grafana
 #      - run:
