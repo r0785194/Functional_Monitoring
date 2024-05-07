@@ -15,6 +15,7 @@ jobs:
       - checkout
       - browser-tools/install-chrome
       - browser-tools/install-chromedriver
+      - setup_remote_docker
       - run:
           command: docker --version
       - run:
