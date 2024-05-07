@@ -52,7 +52,7 @@ jobs:
 #          name: Save secret value to file
 #          command: echo "$TEST_FILE_PATH" > test_file_path.txt
       # Run Telegraf container
-      - run: docker run -d --name telegraf --network influxdb-network --mount type=bind,source="$(cat test_file_path.txt)",target=/etc/telegraf-xml -v telegraf-config:/etc/telegraf telegraf
+      - run: docker run -d --name telegraf --network influxdb-network --mount type=bind,source="$TEST_FILE_PATH",target=/etc/telegraf-xml -v telegraf-config:/etc/telegraf telegraf
       - run:
           name: Wait for Telegraf logs
           command: bash telegraf-monitor.sh wait_for_log_line telegraf "\[outputs.influxdb_v2\] Wrote batch of"
