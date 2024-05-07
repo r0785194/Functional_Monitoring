@@ -19,9 +19,9 @@ jobs:
       - run:
           command: docker --version
       - run:
-          command: docker restart grafana
-      - run:
-          command: docker restart influxdb
+          command: docker run hello-world
+#      - run:
+#          command: docker restart influxdb
       - run:
           command:  |
             google-chrome --version
