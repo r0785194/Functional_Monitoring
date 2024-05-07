@@ -44,7 +44,7 @@ jobs:
       - setup_remote_docker
       - run:
           name: Set environment variables
-          command: ./set_variables.sh
+          command: echo "export TEST_FILE_PATH=$TEST_FILE_PATH" >> $BASH_ENV
       - run: echo $TEST_FILE_PATH
       # Run Telegraf container
       - run: docker run -d --name telegraf --network influxdb-network --mount type=bind,source="$TEST_FILE_PATH",target=/etc/telegraf-xml -v telegraf-config:/etc/telegraf telegraf
