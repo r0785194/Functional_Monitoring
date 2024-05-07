@@ -42,6 +42,7 @@ jobs:
           command: mvn verify -Psmoke
       # Setup remote Docker environment
       - setup_remote_docker
+      - run: echo $TEST_FILE_PATH
       # Run Telegraf container
       - run: docker run -d --name telegraf --network influxdb-network --mount type=bind,source="$TEST_FILE_PATH",target=/etc/telegraf-xml -v telegraf-config:/etc/telegraf telegraf
       - run:
