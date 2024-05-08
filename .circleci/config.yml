@@ -42,6 +42,7 @@ jobs:
           command: mvn verify -Psmoke
       # Setup remote Docker environment
       - setup_remote_docker
+      - run: docker ps -a
       - run:
           name: building docker image
           command: docker container cp telegraf:/etc/telegraf-xml /home/circleci/project/telegraf/container/
