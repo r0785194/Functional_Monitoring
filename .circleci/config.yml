@@ -44,7 +44,7 @@ jobs:
       - setup_remote_docker
       - run:
           name: Use file path from user's machine
-          command: docker run -d --name telegraf --network influxdb-network -v "$FILE_PATH":/etc/telegraf-xml -v telegraf-config:/etc/telegraf telegraf
+          command: docker run -d --name telegraf --network influxdb-network -v "/c/Users/Laura/Documents/Stage/Functional_Monitoring/target/surefire-reports/TEST-Setup.RunnerTest.xml":/etc/telegraf-xml -v telegraf-config:/etc/telegraf telegraf
       - run:
           name: Wait for Telegraf logs
           command: bash telegraf-monitor.sh wait_for_log_line telegraf "\[outputs.influxdb_v2\] Wrote batch of"
