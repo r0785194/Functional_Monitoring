@@ -15,14 +15,6 @@ jobs:
       - checkout
       - browser-tools/install-chrome
       - browser-tools/install-chromedriver
-      # Setup remote Docker environment
-      - setup_remote_docker
-      # Create Docker network
-      - run: docker network create influxdb-network
-      # Run InfluxDB container
-      - run: docker run -d --name influxdb --network influxdb-network -p 8086:8086 -v influxdb-data:/var/lib/influxdb influxdb
-      # Run Grafana container
-      - run: docker run -d --name grafana --network influxdb-network -p 3000:3000 grafana/grafana
       - run:
           command:  |
             google-chrome --version
@@ -42,6 +34,12 @@ jobs:
           command: mvn verify -Psmoke
       # Setup remote Docker environment
       - setup_remote_docker
+      # Create Docker network
+      - run: docker network create influxdb-network
+      # Run InfluxDB container
+      - run: docker run -d --name influxdb --network influxdb-network -p 8086:8086 -v influxdb-data:/var/lib/influxdb influxdb
+      # Run Grafana container
+      - run: docker run -d --name grafana --network influxdb-network -p 3000:3000 grafana/grafana
       - run:
           name: Use file path from user's machine
           command: docker run -d --name telegraf --network influxdb-network -v "/c/Users/Laura/Documents/Stage/Functional_Monitoring/target/surefire-reports/TEST-Setup.RunnerTest.xml":/etc/telegraf-xml -v telegraf-config:/etc/telegraf telegraf
