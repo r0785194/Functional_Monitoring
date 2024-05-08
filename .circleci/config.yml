@@ -42,7 +42,7 @@ jobs:
       - run: docker run -d --name grafana --network influxdb-network -p 3000:3000 grafana/grafana
       - run:
           name: Use file path from user's machine
-          command: docker run -d --name telegraf --network influxdb-network -v "$TEST_FILE_PATH":/etc/telegraf-xml -v telegraf-config:/etc/telegraf --env TEST_FILE_PATH="$TEST_FILE_PATH" telegraf
+          command: docker run -d --name telegraf --network influxdb-network -v "$TEST_FILE_PATH":/etc/telegraf-xml -v "$TELEGRAF_CONF":/etc/telegraf --env TEST_FILE_PATH="$TEST_FILE_PATH" --env TELEGRAF_CONF="$TELEGRAF_CONF" telegraf
       - run: ls -al
       - run:
           name: Wait for Telegraf logs
