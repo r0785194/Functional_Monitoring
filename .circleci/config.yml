@@ -42,7 +42,7 @@ jobs:
       - run: docker run -d --name grafana --network influxdb-network -p 3000:3000 grafana/grafana
       - run:
           name: Use file path from user's machine
-          command: docker run -d --name telegraf --network influxdb-network -v "/c/Users/Laura/Documents/Stage/Functional_Monitoring/target/surefire-reports/TEST-Setup.RunnerTest.xml":/etc/telegraf-xml -v telegraf-config:/etc/telegraf telegraf
+          command: docker run -d --name telegraf --network influxdb-network -v "/target/surefire-reports/TEST-Setup.RunnerTest.xml":/etc/telegraf-xml -v telegraf-config:/etc/telegraf telegraf
       - run: ls -al
       - run:
           name: Wait for Telegraf logs
