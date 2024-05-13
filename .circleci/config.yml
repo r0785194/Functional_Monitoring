@@ -4,6 +4,11 @@ version: 2.1
 orbs:
   maven: circleci/maven@1.4.1
   browser-tools: circleci/browser-tools@1.4.8
+
+  services:
+    telegraf:
+      image: telegraf:latest
+
 jobs:
   build:
     docker:
@@ -32,25 +37,11 @@ jobs:
       - run:
           name: Run tests
           command: mvn verify -Psmoke
-      # Setup remote Docker environment
-      - setup_remote_docker
-      # Create Docker network
-      - run: docker network create influxdb-network
-      # Run InfluxDB container
-      - run: docker run -d --name influxdb --network influxdb-network -p 8086:8086 -v influxdb-data:/var/lib/influxdb influxdb
-      # Run Grafana container
-      - run: docker run -d --name grafana --network influxdb-network -p 3000:3000 grafana/grafana
       - run:
-          name: Use file path from user's machine
-          command: docker run -d --name telegraf --network influxdb-network -v "$TEST_FILE_PATH":/etc/telegraf-xml -v "$TELEGRAF_CONF":/etc/telegraf/telegraf.conf --env TEST_FILE_PATH="$TEST_FILE_PATH" --env TELEGRAF_CONF="$TELEGRAF_CONF" telegraf
-      - run: ls -al
-      - run:
-          name: Wait for Telegraf logs
-          command: bash telegraf-monitor.sh wait_for_log_line telegraf "\[outputs.influxdb_v2\] Wrote batch of"
+          name: Post  to telegraf
+          command: |
+          curl -X POST -H "Content-Type: application/xml" --data-binary "@target/surefire-reports/TEST-Setup.RunnerTest.xml" http://telegraf:8080/telegraf
 
-      - run:
-          name: Stop Telegraf container
-          command: bash telegraf-monitor.sh stop_container telegraf
 
   sanity-test:
     docker:
@@ -65,13 +56,6 @@ jobs:
           name: Run tests
           command: mvn verify -Psanity
       - run: docker start telegraf
-      - run:
-          name: Wait for Telegraf logs
-          command: bash telegraf-monitor.sh wait_for_log_line telegraf "\[outputs.influxdb_v2\] Wrote batch of"
-
-      - run:
-          name: Stop Telegraf container
-          command: bash telegraf-monitor.sh stop_container telegraf
 
   regression-test:
     docker:
@@ -86,13 +70,6 @@ jobs:
           name: Run tests
           command: mvn verify -Pregression
       - run: docker start telegraf
-      - run:
-          name: Wait for Telegraf logs
-          command: bash telegraf-monitor.sh wait_for_log_line telegraf "\[outputs.influxdb_v2\] Wrote batch of"
-
-      - run:
-          name: Stop Telegraf container
-          command: bash telegraf-monitor.sh stop_container telegraf
 
 workflows:
   build-and-test:
