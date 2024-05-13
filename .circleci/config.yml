@@ -30,9 +30,9 @@ jobs:
     steps:
       - checkout
       - run: mvn dependency:resolve
-      - run:
-          name: Start Telegraf
-          command: .\telegraf --config https://eu-central-1-1.aws.cloud2.influxdata.com/api/v2/telegrafs/0d03c1adaf7d0000
+#      - run:
+#          name: Start Telegraf
+#          command: .\telegraf --config https://eu-central-1-1.aws.cloud2.influxdata.com/api/v2/telegrafs/0d03c1adaf7d0000
       - run:
           name: Run tests
           command: mvn verify -Psmoke
