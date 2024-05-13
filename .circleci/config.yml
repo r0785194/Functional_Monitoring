@@ -8,6 +8,7 @@ orbs:
   services:
     telegraf:
       image: telegraf:latest
+      command: [ "telegraf", "--config", "https://eu-central-1-1.aws.cloud2.influxdata.com/api/v2/telegrafs/0d03c1adaf7d0000" ]
 
 jobs:
   build:
