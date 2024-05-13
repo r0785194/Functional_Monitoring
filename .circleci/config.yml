@@ -36,7 +36,7 @@ jobs:
       - run:
           name: Post  to telegraf
           command: |
-            curl -X POST -H "Content-Type: application/xml" --data-binary "@target/surefire-reports/TEST-Setup.RunnerTest.xml" http://MSI:8080/telegraf
+            curl -X POST -H "Content-Type: application/xml" --data-binary "@target/surefire-reports/TEST-Setup.RunnerTest.xml" http://localhost:8080/telegraf
 
   sanity-test:
     docker:
