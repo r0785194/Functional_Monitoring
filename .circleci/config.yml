@@ -36,7 +36,7 @@ jobs:
       - run:
           name: Post  to telegraf
           command: |
-            curl -X POST -H "Content-Type: application/xml" --data-binary "@target/surefire-reports/TEST-Setup.RunnerTest.xml" http://host.docker.internal:8080/telegraf
+            curl -X POST -H "Content-Type: application/xml" --data-binary "@target/surefire-reports/TEST-Setup.RunnerTest.xml" http://MSI:8080/telegraf
 
   sanity-test:
     docker:
@@ -50,7 +50,6 @@ jobs:
       - run:
           name: Run tests
           command: mvn verify -Psanity
-      - run: docker start telegraf
 
   regression-test:
     docker:
@@ -64,7 +63,6 @@ jobs:
       - run:
           name: Run tests
           command: mvn verify -Pregression
-      - run: docker start telegraf
 
 workflows:
   build-and-test:
