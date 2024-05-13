@@ -5,11 +5,6 @@ orbs:
   maven: circleci/maven@1.4.1
   browser-tools: circleci/browser-tools@1.4.8
 
-  services:
-    telegraf:
-      image: telegraf:latest
-      command: [ "telegraf", "--config", "https://eu-central-1-1.aws.cloud2.influxdata.com/api/v2/telegrafs/0d03c1adaf7d0000" ]
-
 jobs:
   build:
     docker:
@@ -35,18 +30,16 @@ jobs:
     steps:
       - checkout
       - run: mvn dependency:resolve
-#      - run:
-#          name: Start Telegraf
-#          command: |
-#            cd "C:\Program Files\InfluxData\telegraf"
-#            .\telegraf --config https://eu-central-1-1.aws.cloud2.influxdata.com/api/v2/telegrafs/0d03c1adaf7d0000
+      - run:
+          name: Start Telegraf
+          command: telegraf --config https://eu-central-1-1.aws.cloud2.influxdata.com/api/v2/telegrafs/0d03c1adaf7d0000
       - run:
           name: Run tests
           command: mvn verify -Psmoke
       - run:
           name: Post  to telegraf
           command: |
-            curl -X POST -H "Content-Type: application/xml" --data-binary "@target/surefire-reports/TEST-Setup.RunnerTest.xml" http://192.168.0.109:8080/telegraf
+            curl -X POST -H "Content-Type: application/xml" --data-binary "@target/surefire-reports/TEST-Setup.RunnerTest.xml" http://localhost:8080/telegraf
 
   sanity-test:
     docker:
