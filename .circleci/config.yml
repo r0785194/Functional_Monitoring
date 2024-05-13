@@ -32,7 +32,7 @@ jobs:
       - run: mvn dependency:resolve
       - run:
           name: Start Telegraf
-          command: C:\Program Files\InfluxData\telegraf\.\telegraf --config https://eu-central-1-1.aws.cloud2.influxdata.com/api/v2/telegrafs/0d03c1adaf7d0000
+          command: .\telegraf --config https://eu-central-1-1.aws.cloud2.influxdata.com/api/v2/telegrafs/0d03c1adaf7d0000
       - run:
           name: Run tests
           command: mvn verify -Psmoke
