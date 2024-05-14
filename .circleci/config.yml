@@ -25,7 +25,6 @@ jobs:
     docker:
       - image: cimg/openjdk:21.0
       - image: selenium/standalone-chrome:3.141.59-20200409
-      - image: telegraf
         environment:
           CI: true
     steps:
@@ -35,9 +34,15 @@ jobs:
       - run:
           name: Run tests
           command: mvn verify -Psmoke
-#      - run:
-#          name: start telegraf
-#          command: telegraf --config https://eu-central-1-1.aws.cloud2.influxdata.com/api/v2/telegrafs/0d03c1adaf7d0000
+      - run:
+          name: Install Telegraf
+          command: |
+            wget -qO- https://repos.influxdata.com/influxdb.key | sudo apt-key add -
+            echo "deb https://repos.influxdata.com/debian buster stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
+            sudo apt-get update && sudo apt-get install telegraf
+      - run:
+          name: start telegraf
+          command: telegraf --config https://eu-central-1-1.aws.cloud2.influxdata.com/api/v2/telegrafs/0d03c1adaf7d0000
       - run: chmod +x .circleci/send_to_telegraf.sh
       - run:
           name: Post to telegraf
