@@ -35,8 +35,8 @@ jobs:
           command: mvn verify -Psmoke
       - run:
           name: Post  to telegraf
-          command: |
-            curl -X POST -H "Content-Type: application/xml" --data-binary "@target/surefire-reports/TEST-Setup.RunnerTest.xml" http://0.0.0.0:8080/telegraf
+          command: ./send_to_telegraf.sh
+
 
   sanity-test:
     docker:
