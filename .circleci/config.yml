@@ -33,7 +33,7 @@ jobs:
       - run:
           name: Run tests
           command: mvn verify -Psmoke
-      - run: ls -al .circleci
+      - run: chmod +x .circleci/send_to_telegraf.sh
       - run:
           name: Post to telegraf
           command: .circleci/send_to_telegraf.sh
