@@ -33,12 +33,10 @@ jobs:
       - run:
           name: Run tests
           command: mvn verify -Psmoke
+      - setup_remote_docker
       - run:
-          name: Install Telegraf
-          command: |
-            curl -sL https://repos.influxdata.com/influxdb.key | gpg --dearmor -o ~/influxdb-archive-keyring.gpg
-            echo "deb [signed-by=$HOME/influxdb-archive-keyring.gpg] https://repos.influxdata.com/debian buster stable" | sudo tee /etc/apt/sources.list.d/influxdb.list > /dev/null
-            sudo apt-get update && sudo apt-get install -y telegraf
+          name: Run Telegraf container
+          command: docker run --name telegraf-container -d telegraf:latest
       - run:
           name: start telegraf
           command: telegraf --config https://eu-central-1-1.aws.cloud2.influxdata.com/api/v2/telegrafs/0d03c1adaf7d0000
