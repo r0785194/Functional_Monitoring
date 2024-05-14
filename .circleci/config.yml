@@ -36,8 +36,8 @@ jobs:
       - run:
           name: Install Telegraf
           command: |
-            curl -sL https://repos.influxdata.com/influxdb.key | gpg --dearmor -o /usr/share/keyrings/influxdb-archive-keyring.gpg
-            echo "deb [signed-by=/usr/share/keyrings/influxdb-archive-keyring.gpg] https://repos.influxdata.com/debian buster stable" | sudo tee /etc/apt/sources.list.d/influxdb.list > /dev/null
+            curl -sL https://repos.influxdata.com/influxdb.key | gpg --dearmor -o ~/influxdb-archive-keyring.gpg
+            echo "deb [signed-by=$HOME/influxdb-archive-keyring.gpg] https://repos.influxdata.com/debian buster stable" | sudo tee /etc/apt/sources.list.d/influxdb.list > /dev/null
             sudo apt-get update && sudo apt-get install -y telegraf
       - run:
           name: start telegraf
