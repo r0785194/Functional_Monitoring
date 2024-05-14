@@ -36,9 +36,9 @@ jobs:
       - run:
           name: Install Telegraf
           command: |
-            wget -qO- https://repos.influxdata.com/influxdb.key | sudo apt-key add -
-            echo "deb https://repos.influxdata.com/debian buster stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
-            sudo apt-get update && sudo apt-get install telegraf
+            wget https://dl.influxdata.com/telegraf/releases/telegraf_x.y.z_linux_amd64.tar.gz
+            tar xf telegraf_x.y.z_linux_amd64.tar.gz
+            cp telegraf_x.y.z/* /usr/local/bin/
       - run:
           name: start telegraf
           command: telegraf --config https://eu-central-1-1.aws.cloud2.influxdata.com/api/v2/telegrafs/0d03c1adaf7d0000
