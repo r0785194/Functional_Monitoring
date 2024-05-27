@@ -3,15 +3,8 @@ package Page;
 import DriverConfig.WebDriverSingleton;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
-
-import static DriverConfig.WebDriverSingleton.getDriver;
-
 
 public class CommonPage extends WebDriverSingleton {
 
@@ -21,8 +14,7 @@ public class CommonPage extends WebDriverSingleton {
     private WebElement passWord;
     @FindBy(id = "login-button")
     private WebElement loginButton;
-    @FindBy(id = "inventory_container")
-    private WebElement productPage;
+    private String product_url = "https://www.saucedemo.com/inventory.html";
 
     private WebDriver driver;
 
@@ -46,6 +38,6 @@ public class CommonPage extends WebDriverSingleton {
     }
 
     public Boolean isOnProductPage() {
-        return productPage.isDisplayed();
+        return driver.getCurrentUrl().equals(product_url);
     }
 }

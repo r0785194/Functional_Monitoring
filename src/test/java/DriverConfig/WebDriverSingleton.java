@@ -20,9 +20,12 @@ public abstract class WebDriverSingleton {
     public static WebDriver getDriver() {
         if (driver == null) {
             try {
-                driver = isRunningOnCircleCI() ? new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), getOptions()) : new ChromeDriver(getOptions());
+                driver = isRunningOnCircleCI() ? new RemoteWebDriver(new URL(
+                        "http://localhost:4444/wd/hub"),
+                        getOptions()) : new ChromeDriver(getOptions());
             } catch (MalformedURLException e) {
-                throw new RuntimeException("Fout bij het maken van de URL voor de RemoteWebDriver", e);
+                throw new RuntimeException
+                        ("Fout bij het maken van de URL voor de RemoteWebDriver", e);
             }
         }
         return driver;

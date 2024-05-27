@@ -4,7 +4,7 @@ import Page.SortingProductPage;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class SortingProductPageSteps {
 
@@ -27,11 +27,11 @@ public class SortingProductPageSteps {
 
     @Then("the products are shown in alphabetical order")
     public void theProductsAreShownInAlphabeticalOrder() {
-        assertTrue(sortingProductPage.isSortedAToZ());
+        assertThat(sortingProductPage.isSortedAToZ()).as("Products are not sorted from A to Z").isTrue();
     }
 
     @Then("I see the products ordered with the product lowest price first and highest price last")
     public void iSeeTheProductsOrderedWithTheProductLowestPriceFirstAndHighestPriceLast() {
-        assertTrue(sortingProductPage.isSortedLoToHi());
+        assertThat(sortingProductPage.isSortedLoToHi()).as("Products are not sorted from low to high").isTrue();
     }
 }

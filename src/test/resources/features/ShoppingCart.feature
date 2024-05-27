@@ -20,12 +20,14 @@ Feature: Shopping Cart Functionality
 
   @Sanity
   Scenario: deleting it from the product overview page
-    When I click on the ‘remove' button in my overview page next to a product that I’ve added to my cart
+    When I click on the ‘add to cart’ next to a product
+    When I click on the remove button in my overview page from the product I’ve added to my cart
     Then that product is removed from my cart in overview
 
   @Sanity
   Scenario: deleting it from the your cart page
-    Given I am on the ‘Your cart’ page
+    Given I click on the ‘add to cart’ next to a product
+    And I am on the ‘Your cart’ page
     When I click on the ‘remove' button next to a product that I’ve added to my cart
     Then that product is removed from my cart
     And the list updates itself and I don’t see the product anymore that I just deleted
