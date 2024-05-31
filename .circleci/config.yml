@@ -31,6 +31,9 @@ jobs:
     steps:
       - checkout
       - run: mvn dependency:resolve
+      - run:
+          name: Run tests
+          command: mvn verify -Psmoke
       - run: chmod +x .circleci/install_telegraf.sh
       - run:
           name: Install Telegraf
@@ -40,8 +43,8 @@ jobs:
           command: telegraf --config https://eu-central-1-1.aws.cloud2.influxdata.com/api/v2/telegrafs/0d03c1adaf7d0000
           background: true
       - run:
-        name: Run tests
-        command: mvn verify -Psmoke
+          name: Wait for Telegraf to start
+          command: sleep 2
       - run: chmod +x .circleci/send_to_telegraf.sh
       - run:
           name: Post to telegraf
@@ -56,6 +59,9 @@ jobs:
     steps:
       - checkout
       - run: mvn dependency:resolve
+      - run:
+          name: Run tests
+          command: mvn verify -Psanity
       - run: chmod +x .circleci/install_telegraf.sh
       - run:
           name: Install Telegraf
@@ -65,8 +71,8 @@ jobs:
           command: telegraf --config https://eu-central-1-1.aws.cloud2.influxdata.com/api/v2/telegrafs/0d03c1adaf7d0000
           background: true
       - run:
-          name: Run tests
-          command: mvn verify -Psanity
+          name: Wait for Telegraf to start
+          command: sleep 2
       - run: chmod +x .circleci/send_to_telegraf.sh
       - run:
           name: Post to telegraf
@@ -81,6 +87,9 @@ jobs:
     steps:
       - checkout
       - run: mvn dependency:resolve
+      - run:
+          name: Run tests
+          command: mvn verify -Pregression
       - run: chmod +x .circleci/install_telegraf.sh
       - run:
           name: Install Telegraf
@@ -90,8 +99,8 @@ jobs:
           command: telegraf --config https://eu-central-1-1.aws.cloud2.influxdata.com/api/v2/telegrafs/0d03c1adaf7d0000
           background: true
       - run:
-          name: Run tests
-          command: mvn verify -Pregression
+          name: Wait for Telegraf to start
+          command: sleep 2
       - run: chmod +x .circleci/send_to_telegraf.sh
       - run:
           name: Post to telegraf
