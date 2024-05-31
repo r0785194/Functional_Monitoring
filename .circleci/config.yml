@@ -78,7 +78,6 @@ jobs:
       - image: selenium/standalone-chrome:3.141.59-20200409
         environment:
           CI: true
-    executor:
     steps:
       - checkout
       - run: mvn dependency:resolve
