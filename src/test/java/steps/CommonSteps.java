@@ -5,7 +5,7 @@ import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CommonSteps {
 
@@ -28,6 +28,6 @@ public class CommonSteps {
 
     @Given("I am on the product page")
     public void iAmOnTheProductPage() {
-        assertTrue(commonPage.isOnProductPage());
+        assertThat(commonPage.isOnProductPage()).as("I am not on the product page").isTrue();
     }
 }
