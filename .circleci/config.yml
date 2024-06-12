@@ -68,9 +68,11 @@ jobs:
           name: Run tests
           command: mvn verify -Psanity
       - run: chmod +x .circleci/send_to_telegraf.sh
+        continue-on-error: true
       - run:
           name: Post to telegraf
           command: .circleci/send_to_telegraf.sh
+          continue-on-error: true
 
   regression-test:
     docker:

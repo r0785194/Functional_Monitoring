@@ -17,6 +17,8 @@ public class ProductDetailSteps {
 
     @Then("I’m redirected to the product detail screen of {string}")
     public void iMRedirectedToTheProductDetailScreenOf(String productName) {
-        assertThat(productDetailPage.isOnProductDetailPage(productName)).as("I am not redirected to the detail page of the product: " + productName).isTrue();
+        assertThat(productDetailPage.isOnProductDetailPage(productName))
+                .as("I am not redirected to the detail page of the product: " + productName)
+                .isTrue();
     }
 }

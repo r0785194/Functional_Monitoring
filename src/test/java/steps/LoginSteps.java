@@ -39,13 +39,15 @@ public class LoginSteps {
 
     @Then("redirected to the product page")
     public void redirectedToTheProductPage() {
-        assertThat(logInPage.isOnProductPage()).as("I am not redirected to the product overview page").isTrue();
+        assertThat(logInPage.isOnProductPage())
+                .as("I am not redirected to the product overview page").isTrue();
     }
 
     @Then("an error message in login page is shown {}")
     public void anErrorMessageInLoginPageIsShown(String errorMessage)
     {
-        assertThat(logInPage.isErrorMessage().contains(errorMessage)).as("No error message is shown on the login page").isTrue();
+        assertThat(logInPage.isErrorMessage().contains(errorMessage))
+                .as("No error message is shown on the login page").isTrue();
     }
 
     @Then("a red cross is shown by the username and password")

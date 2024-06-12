@@ -32,6 +32,7 @@ public class LogoutSteps {
 
     @Then("redirected to the Home Screen the login screen")
     public void redirectedToTheHomeScreenTheLoginScreen() {
-        assertThat(logOutPage.isOnHomeScreen()).as("I am not redirected to the login page").isTrue();
+        assertThat(logOutPage.isOnHomeScreen())
+                .as("I am not redirected to the login page").isTrue();
     }
 }

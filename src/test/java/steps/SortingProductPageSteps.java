@@ -27,11 +27,13 @@ public class SortingProductPageSteps {
 
     @Then("the products are shown in alphabetical order")
     public void theProductsAreShownInAlphabeticalOrder() {
-        assertThat(sortingProductPage.isSortedAToZ()).as("Products are not sorted from A to Z").isTrue();
+        assertThat(sortingProductPage.isSortedAToZ())
+                .as("Products are not sorted from A to Z").isTrue();
     }
 
     @Then("I see the products ordered with the product lowest price first and highest price last")
     public void iSeeTheProductsOrderedWithTheProductLowestPriceFirstAndHighestPriceLast() {
-        assertThat(sortingProductPage.isSortedLoToHi()).as("Products are not sorted from low to high").isTrue();
+        assertThat(sortingProductPage.isSortedLoToHi())
+                .as("Products are not sorted from low to high").isTrue();
     }
 }
