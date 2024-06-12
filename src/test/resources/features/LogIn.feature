@@ -4,7 +4,7 @@ Feature: Log in to the website
   @Smoke
   Scenario: Successful Login
     Given I am on the login page
-    When I fill in my username standard_user
+    When I fill in my username locked_out_user
     And I fill in my password secret_sauce
     And I click on the login button
     Then I'm logged in
