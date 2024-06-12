@@ -1,40 +1,114 @@
 # This config was automatically generated from your source code
 # Stacks detected: deps:java:.
 version: 2.1
+orbs:
+  maven: circleci/maven@1.4.1
+  browser-tools: circleci/browser-tools@1.4.8
+
 jobs:
-  test-java:
+  build:
     docker:
       - image: cimg/openjdk:21.0
+      - image: selenium/standalone-chrome:3.141.59-20200409
+        environment:
+          CI: true
     steps:
       - checkout
+      - browser-tools/install-chrome
+      - browser-tools/install-chromedriver
       - run:
-          name: Calculate cache key
-          command: |-
-            find . -name 'pom.xml' -o -name 'gradlew*' -o -name '*.gradle*' | \
-                    sort | xargs cat > /tmp/CIRCLECI_CACHE_KEY
-      - restore_cache:
-          key: cache-{{ checksum "/tmp/CIRCLECI_CACHE_KEY" }}
-      - run:
-          command: mvn verify
-      - store_test_results:
-          path: target/surefire-reports
-      - save_cache:
-          key: cache-{{ checksum "/tmp/CIRCLECI_CACHE_KEY" }}
-          paths:
-            - ~/.m2/repository
-  deploy:
-    # This is an example deploy job, not actually used by the workflow
+          command:  |
+            google-chrome --version
+            chromedriver --version
+      - run: mvn dependency:resolve
+
+  smoke-test:
     docker:
-      - image: cimg/base:stable
+      - image: cimg/openjdk:21.0
+      - image: selenium/standalone-chrome:3.141.59-20200409
+        environment:
+          CI: true
     steps:
-      # Replace this with steps to deploy to users
+      - checkout
+      - run: mvn dependency:resolve
+      - run: chmod +x .circleci/install_telegraf.sh
       - run:
-          name: deploy
-          command: '#e.g. ./deploy.sh'
+          name: Install Telegraf
+          command: .circleci/install_telegraf.sh
+      - run:
+          name: start telegraf
+          command: telegraf --config https://eu-central-1-1.aws.cloud2.influxdata.com/api/v2/telegrafs/0d03c1adaf7d0000
+          background: true
+      - run:
+          name: Run tests
+          command: mvn verify -Psmoke
+      - run: chmod +x .circleci/send_to_telegraf.sh
+      - run:
+          name: Post to telegraf
+          command: .circleci/send_to_telegraf.sh
+
+  sanity-test:
+    docker:
+      - image: cimg/openjdk:21.0
+      - image: selenium/standalone-chrome:3.141.59-20200409
+        environment:
+          CI: true
+    steps:
+      - checkout
+      - run: mvn dependency:resolve
+      - run: chmod +x .circleci/install_telegraf.sh
+      - run:
+          name: Install Telegraf
+          command: .circleci/install_telegraf.sh
+      - run:
+          name: start telegraf
+          command: telegraf --config https://eu-central-1-1.aws.cloud2.influxdata.com/api/v2/telegrafs/0d03c1adaf7d0000
+          background: true
+      - run:
+          name: Run tests
+          command: mvn verify -Psanity
+      - run: chmod +x .circleci/send_to_telegraf.sh
+      - run:
+          name: Post to telegraf
+          command: .circleci/send_to_telegraf.sh
+
+  regression-test:
+    docker:
+      - image: cimg/openjdk:21.0
+      - image: selenium/standalone-chrome:3.141.59-20200409
+        environment:
+          CI: true
+    steps:
+      - checkout
+      - run: mvn dependency:resolve
+      - run: chmod +x .circleci/install_telegraf.sh
+      - run:
+          name: Install Telegraf
+          command: .circleci/install_telegraf.sh
+      - run:
+          name: start telegraf
+          command: telegraf --config https://eu-central-1-1.aws.cloud2.influxdata.com/api/v2/telegrafs/0d03c1adaf7d0000
+          background: true
+      - run:
+          name: Run tests
+          command: mvn verify -Pregression
+      - run: chmod +x .circleci/send_to_telegraf.sh
+      - run:
+          name: Post to telegraf
+          command: .circleci/send_to_telegraf.sh
+
 workflows:
   build-and-test:
     jobs:
-      - test-java
-    # - deploy:
-    #     requires:
-    #       - test-java
+      - build
+      - smoke-test:
+          requires:
+            - build
+      - sanity-test:
+          requires:
+            - build
+            - smoke-test
+      - regression-test:
+          requires:
+            - build
+            - sanity-test

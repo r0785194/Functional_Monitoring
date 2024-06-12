@@ -1,16 +1,14 @@
 package steps;
 
 import Page.LogOutPage;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class LogoutSteps {
 
-    private LogOutPage logOutPage = new LogOutPage();
+    private final LogOutPage logOutPage = new LogOutPage();
 
     @When("I click on the hamburger menu in the nav. bar")
     public void iClickOnTheHamburgerMenuInTheNavBar() {
@@ -24,16 +22,16 @@ public class LogoutSteps {
 
     @Then("I see a list of buttons")
     public void iSeeAListOfButtons() {
-        assertTrue(logOutPage.areButtonsDisplayed());
+        assertThat(logOutPage.areButtonsDisplayed()).as("I dont see the list of buttons").isTrue();
     }
 
     @Then("I am logged out of the application")
     public void iAmLoggedOutOfTheApplication() {
-        assertTrue(logOutPage.isLoggedOut());
+        assertThat(logOutPage.isLoggedOut()).as("I am not logged out").isTrue();
     }
 
     @Then("redirected to the Home Screen the login screen")
     public void redirectedToTheHomeScreenTheLoginScreen() {
-        assertTrue(logOutPage.isOnHomeScreen());
+        assertThat(logOutPage.isOnHomeScreen()).as("I am not redirected to the login page").isTrue();
     }
 }

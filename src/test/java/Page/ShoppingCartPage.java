@@ -1,6 +1,7 @@
 package Page;
 
 import DriverConfig.WebDriverSingleton;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -73,6 +74,7 @@ public class ShoppingCartPage extends WebDriverSingleton {
     public ShoppingCartPage() {
         PageFactory.initElements(driver, this);
     }
+
     private final WebDriver driver = getDriver();
 
     public void clickOnAddToCart() {
@@ -90,8 +92,13 @@ public class ShoppingCartPage extends WebDriverSingleton {
     }
 
     public Boolean isCartBadgeShown() {
-        return cartBadge.isDisplayed();
+        try {
+            return cartBadge != null && cartBadge.isDisplayed();
+        } catch (NoSuchElementException e) {
+            return false;
+        }
     }
+
     public void goToCart() {
         cart.click();
     }
@@ -99,6 +106,7 @@ public class ShoppingCartPage extends WebDriverSingleton {
     public Boolean isAddedToCart() {
         return cartItemName.getText().equals(addedItemName);
     }
+
     public Boolean isRemovedFromCart() {
         return addToCartButtons.get(clickedItem).isDisplayed();
     }

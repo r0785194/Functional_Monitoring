@@ -6,24 +6,31 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
+
 public class ProductDetailPage extends WebDriverSingleton {
 
-    @FindBy(id = "item_4_img_link")
-    private WebElement productLink;
+    @FindBy(css = ".inventory_item_name")
+    private List<WebElement> productNames;
 
-    @FindBy(id = "inventory_item_container")
-    private WebElement productDetail;
+    @FindBy(css = ".inventory_details_name")
+    private WebElement productDetailName;
 
     public ProductDetailPage() {
         PageFactory.initElements(driver, this);
     }
     private final WebDriver driver = getDriver();
 
-    public void clickOnProduct() {
-        productLink.click();
+    public void clickOnProductByName(String productName) {
+        for (int i = 0; i < productNames.size(); i++) {
+            if (productNames.get(i).getText().equals(productName)) {
+                productNames.get(i).click();
+                break;
+            }
+        }
     }
 
-    public Boolean isOnProductDetailPage() {
-        return  productDetail.isDisplayed();
+    public Boolean isOnProductDetailPage(String productName) {
+        return  productDetailName.getText().equals(productName);
     }
 }

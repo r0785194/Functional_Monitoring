@@ -1,22 +1,17 @@
 package steps;
 
 import Page.ShoppingCartPage;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ShoppingCartSteps {
 
-    private ShoppingCartPage shoppingCartPage = new ShoppingCartPage();
+    private final ShoppingCartPage shoppingCartPage = new ShoppingCartPage();
 
     @Given("I am on the ‘Your cart’ page")
     public void iAmOnTheYourCartPage() {
-        shoppingCartPage.clickOnAddToCart();
         shoppingCartPage.goToCart();
         shoppingCartPage.isOnCartPage();
     }
@@ -24,6 +19,8 @@ public class ShoppingCartSteps {
     @When("I click on the ‘add to cart’ next to a product")
     public void iClickOnTheAddToCartNextToAProduct() {
         shoppingCartPage.clickOnAddToCart();
+        shoppingCartPage.getAddedItemName();
+        assertThat(shoppingCartPage.isCartBadgeShown()).as("The badge was not added to the shopping cart icon").isTrue();
     }
 
     @When("I click on the shopping cart icon")
@@ -31,8 +28,8 @@ public class ShoppingCartSteps {
         shoppingCartPage.goToCart();
     }
 
-    @When("I click on the ‘remove' button in my overview page next to a product that I’ve added to my cart")
-    public void iClickOnTheRemoveButtonInMyOverviewPageNextToAProductThatIVeAddedToMyCart() {
+    @When("I click on the remove button in my overview page from the product I’ve added to my cart")
+    public void iClickOnTheRemoveButtonInMyOverviewPageFromTheProductIVeAddedToMyCart() {
         shoppingCartPage.clickOnAddToCart();
         shoppingCartPage.clickRemoveFromCart();
     }
@@ -64,52 +61,46 @@ public class ShoppingCartSteps {
 
     @Then("the product is added to my cart")
     public void theProductIsAddedToMyCart() {
-        shoppingCartPage.getAddedItemName();
-        assertThat(shoppingCartPage.isCartBadgeShown()).isTrue();
         shoppingCartPage.goToCart();
-        assertTrue(shoppingCartPage.isAddedToCart());
+        assertThat(shoppingCartPage.isAddedToCart()).as("The product was not added to the cart").isTrue();
     }
 
     @Then("I’m redirected to the ‘your cart’ screen")
     public void iMRedirectedToTheYourCartScreen() {
-        assertTrue(shoppingCartPage.isOnCartPage());
-    }
-
-    @Then("I can see all the products that I’ve added to my cart")
-    public void iCanSeeAllTheProductsThatIVeAddedToMyCart() {
+        assertThat(shoppingCartPage.isOnCartPage()).as("I am not redirected to my cart").isTrue();
     }
 
     @Then("the list of products in my cart is empty")
     public void theListOfProductsInMyCartIsEmpty() {
-        assertTrue(shoppingCartPage.isCartEmpty());
+        assertThat(shoppingCartPage.isCartEmpty()).as("There are still products in my cart").isTrue();
     }
 
     @Then("that product is removed from my cart in overview")
     public void thatProductIsRemovedFromMyCartInOverview() {
-        assertTrue(shoppingCartPage.isRemovedFromCart());
+        assertThat(shoppingCartPage.isRemovedFromCart()).as("The product was not removed from my cart in the overview page").isTrue();
     }
     @Then("that product is removed from my cart")
     public void thatProductIsRemovedFromMyCart() {
-        assertTrue(shoppingCartPage.itemRemovedFromCart());
+        assertThat(shoppingCartPage.itemRemovedFromCart()).as("The product was not removed from my cart").isTrue();
     }
 
     @Then("the list updates itself and I don’t see the product anymore that I just deleted")
     public void theListUpdatesItselfAndIDonTSeeTheProductAnymoreThatIJustDeleted() {
-        assertTrue(shoppingCartPage.isListUpdated());
+        assertThat(shoppingCartPage.isListUpdated()).as("The deleted product is still shown in the list").isTrue();
     }
 
     @Then("I am redirected to the ‘Checkout: your information’ page")
     public void iAmRedirectedToTheCheckoutYourInformationPage() {
-        assertTrue(shoppingCartPage.isOnCheckout());
+        assertThat(shoppingCartPage.isOnCheckout()).as("I am not redirected to the your information page in checkout").isTrue();
     }
 
     @Then("I’m redirected to the ‘checkout: overview page’")
     public void iMRedirectedToTheCheckoutOverviewPage() {
-        assertTrue(shoppingCartPage.isOnCheckoutOverview());
+        assertThat(shoppingCartPage.isOnCheckoutOverview()).as("I am not redirected to the overview page in checkout").isTrue();
     }
 
-    @Then("I see a order confirmation screen")
+    @Then("I see an order confirmation screen")
     public void iSeeAOrderConfirmationScreen() {
-        assertTrue(shoppingCartPage.isCheckoutComplete());
+        assertThat(shoppingCartPage.isCheckoutComplete()).as("I dont see an order confirmation screen").isTrue();
     }
 }

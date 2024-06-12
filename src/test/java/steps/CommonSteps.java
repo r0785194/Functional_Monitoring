@@ -4,14 +4,12 @@ import Page.CommonPage;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
-import io.cucumber.spring.CucumberContextConfiguration;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
-@CucumberContextConfiguration
 public class CommonSteps {
 
-    private CommonPage commonPage = new CommonPage();
+    private final CommonPage commonPage = new CommonPage();
 
     @Before
     public void iGoToWebsite() {
@@ -30,6 +28,6 @@ public class CommonSteps {
 
     @Given("I am on the product page")
     public void iAmOnTheProductPage() {
-        assertTrue(commonPage.isOnProductPage());
+        assertThat(commonPage.isOnProductPage()).as("I am not on the product page").isTrue();
     }
 }
