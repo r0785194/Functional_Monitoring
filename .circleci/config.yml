@@ -42,14 +42,10 @@ jobs:
       - run:
           name: Run tests
           command: mvn verify -Psmoke
-      - run:
-          name: Make script executable
-          command: chmod +x .circleci/send_to_telegraf.sh
-          continue-on-error: true
+      - run: chmod +x .circleci/send_to_telegraf.sh
       - run:
           name: Post to telegraf
           command: .circleci/send_to_telegraf.sh
-          continue-on-error: true
 
   sanity-test:
     docker:
